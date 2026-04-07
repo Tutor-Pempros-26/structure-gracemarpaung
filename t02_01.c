@@ -1,42 +1,46 @@
-// 12S25022 - Grace Lusyanna Marpaung
-// NIM - Name
-
+// 12S25021 - Gabriel Ignasius Sinaga
+#include <string.h>
 #include <stdio.h>
+
+struct transaksi 
+{
+  int jumlahbuku;
+  double harga;
+  double totalharga;
+  double diskon;
+  double totalbayar;
+};
+
 
 int main(int _argv, char **_argc)
 {
-    int jumlah_buku;
-    double harga_per_buku, total_belanja, potongan = 0, total_bayar;
+  struct transaksi t;
 
-    // Membaca input jumlah dan harga
-    if (scanf("%d %lf", &jumlah_buku, &harga_per_buku) != 2) {
-        return 0;
-    }
+  scanf("%d", &t.jumlahbuku);
+  scanf("%lf", &t.harga);
 
-    // Menghitung total belanja awal
-    total_belanja = (double)jumlah_buku * harga_per_buku;
+  t.totalharga= t.jumlahbuku * t.harga;
 
-    // Logika pengecekan diskon berdasarkan total belanja
-    if (total_belanja > 500000) {
-        potongan = total_belanja * 0.15; // Diskon 15%
-    } else if (total_belanja >= 100000) {
-        potongan = total_belanja * 0.10; // Diskon 10%
-    } else if (total_belanja > 50000) {
-        potongan = total_belanja * 0.05; // Diskon 5%
-    } else {
-        potongan = 0;
-    }
+  if (t.totalharga > 500000) {
+    t.diskon = t.totalharga * 0.15;
+  } else if (t.totalharga > 100000){
+    t.diskon =  t.totalharga * 0.10;
+  } else if (t.totalharga > 50000) {
+    t.diskon =  t.totalharga * 0.05;
+  } else {
+    t.diskon = 0;
+  }
 
-    // Baris pertama: Tampilkan potongan harga dengan 2 desimal atau ---
-    if (total_belanja > 50000) {
-        printf("%.2f\n", potongan);
-    } else {
-        printf("---\n");
-    }
+t.totalbayar = t.totalharga - t.diskon;
 
-    // Baris kedua: Total bayar setelah dipotong diskon
-    total_bayar = total_belanja - potongan;
-    printf("%.2f\n", total_bayar);
+if (t.diskon > 0) {
+      printf("%.2lf\n", t.diskon);
+  } else {
+      printf("---\n");
+  }
 
-    return 0;
+  printf("%.2lf\n", t.totalbayar);
+
+  return 0;
+
 }
